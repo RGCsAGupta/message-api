@@ -40,8 +40,11 @@ jobs:
         audit_level: moderate
         github_token: ${{ secrets.GITHUB_TOKEN }}
         issue_labels: vulnerability,test
-        dedupe_issues: true
 
     - run: npm run test:ci
       env:
         NODE_ENV: CI
+        DB_USER: ${{ secrets.DB_USER }}
+        DB_PASS: ${{ secrets.DB_PASS }}
+        DB_HOST: ${{ secrets.DB_HOST }}
+        DB_NAME: ${{ secrets.DB_NAME }}
