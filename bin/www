@@ -1,18 +1,16 @@
 /* eslint-disable global-require */
+const logger = require('debug')('app');
+const http = require('http');
 const { optionsDb } = require('../src/config/options.db');
 const { init: initDb } = require('../src/services/db');
+const { normalizePort } = require('../src/utils');
 
+const logError = logger.extend('error');
 (async () => {
   // init scripts for dbs
   await initDb(optionsDb);
 
-  const http = require('http');
-  const logger = require('debug')('app');
   const app = require('../src/app');
-  const { normalizePort } = require('../src/utils');
-
-  const logError = logger.extend('error');
-
   /**
      * Create HTTP server.
      */
@@ -66,4 +64,7 @@ const { init: initDb } = require('../src/services/db');
      * Listen on provided port, on all network interfaces.
      */
   server.listen(port);
-})();
+})().catch((err) => {
+  logError(err);
+  process.exit(1);
+});
