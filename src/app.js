@@ -2,7 +2,6 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
-const csrf = require('csurf');
 const helmet = require('helmet');
 const methodOverride = require('method-override');
 
@@ -12,7 +11,6 @@ const { clientErrorHandler } = require('./middleware/client-error-handler');
 const { errorHandler } = require('./middleware/error-handler');
 const { rateLimiterMiddleware } = require('./middleware/rate-limitter-handler');
 const { router } = require('./routes');
-const { isProduction } = require('./utils');
 
 const app = express();
 app.use(rateLimiterMiddleware);
@@ -26,10 +24,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride());
 
 // security
-if (isProduction()) {
-  app.use(csrf({ cookie: true }));
-}
-
 app.use(cors());
 app.use(helmet());
 
