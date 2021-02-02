@@ -1,7 +1,6 @@
 const router = require('express').Router();
+const { apiRouter } = require('./api/v1');
 
-router.get('/', (req, res) => res
-  .status(200)
-  .send({ message: 'welcome to our app' }));
+router.use('/api/v1', apiRouter);
 
 module.exports.router = router;
