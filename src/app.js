@@ -11,6 +11,7 @@ const { logErrorsHandler } = require('./middleware/log-errors-handler');
 const { clientErrorHandler } = require('./middleware/client-error-handler');
 const { errorHandler } = require('./middleware/error-handler');
 const { rateLimiterMiddleware } = require('./middleware/rate-limitter-handler');
+const { router } = require('./routes');
 
 const app = express();
 app.use(rateLimiterMiddleware);
@@ -27,6 +28,9 @@ app.use(methodOverride());
 app.use(csrf({ cookie: true }));
 app.use(cors());
 app.use(helmet());
+
+// app routes
+app.use(router);
 
 app.use(pathNotFoundHandler);
 
