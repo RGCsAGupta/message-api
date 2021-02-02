@@ -52,6 +52,6 @@ module.exports.putMessage = controllerWrapper(async (req, res) => {
 });
 
 module.exports.deleteMessage = controllerWrapper(async (req, res) => {
-  const message = await deleteMessage(req.message.id);
+  const message = await deleteMessage(req.message);
   res.json(message);
 });
