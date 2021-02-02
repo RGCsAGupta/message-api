@@ -26,7 +26,7 @@ module.exports.resolveMessage = controllerWrapper(async (req, res, next) => {
 module.exports.createMessage = controllerWrapper(async (req, res) => {
   const { text } = req.body;
   const message = await createMessage({ text });
-  return res.json(message);
+  return res.json(message.toJSON({ virtuals: true }));
 });
 
 module.exports.getAllMessages = controllerWrapper(async (req, res) => {
@@ -36,22 +36,25 @@ module.exports.getAllMessages = controllerWrapper(async (req, res) => {
   const pageNumber = Number.parseInt(page, 10);
   const limit = Number.parseInt(perPage, 10);
 
-  const messages = await getAllMessages(limit, pageNumber);
+  const { messages, ...restResult } = await getAllMessages(limit, pageNumber);
 
-  return res.json(messages);
+  return res.json({
+    ...restResult,
+    messages: messages.map((m) => m.toJSON({ virtuals: true })),
+  });
 });
 
 module.exports.getMessage = controllerWrapper(async (req, res) => {
-  res.json(req.message);
+  res.json(req.message.toJSON({ virtuals: true }));
 });
 
 module.exports.putMessage = controllerWrapper(async (req, res) => {
   const { text } = req.body;
   const message = await updateMessage(req.message, { text });
-  return res.json(message);
+  return res.json(message.toJSON({ virtuals: true }));
 });
 
 module.exports.deleteMessage = controllerWrapper(async (req, res) => {
   const message = await deleteMessage(req.message);
-  res.json(message);
+  res.json(message.toJSON({ virtuals: true }));
 });
