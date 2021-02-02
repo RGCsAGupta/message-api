@@ -1,3 +1,5 @@
-module.exports.pathNotFoundHandler = (req, res) => {
-  res.status(404).send({ message: '404 Not Found' });
+const ResourceNotFound = require('../errors/ResourceNotFound');
+
+module.exports.pathNotFoundHandler = (req, res, next) => {
+  next(new ResourceNotFound());
 };
