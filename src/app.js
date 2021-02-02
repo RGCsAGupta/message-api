@@ -12,6 +12,7 @@ const { clientErrorHandler } = require('./middleware/client-error-handler');
 const { errorHandler } = require('./middleware/error-handler');
 const { rateLimiterMiddleware } = require('./middleware/rate-limitter-handler');
 const { router } = require('./routes');
+const { isProduction } = require('./utils');
 
 const app = express();
 app.use(rateLimiterMiddleware);
@@ -25,7 +26,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride());
 
 // security
-app.use(csrf({ cookie: true }));
+if (isProduction()) {
+  app.use(csrf({ cookie: true }));
+}
+
 app.use(cors());
 app.use(helmet());
 
