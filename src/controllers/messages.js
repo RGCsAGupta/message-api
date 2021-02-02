@@ -6,7 +6,7 @@ const {
   getMessageById,
   getAllMessages,
   createMessage,
-  deleteMessageById,
+  deleteMessage,
   updateMessage,
 } = require('../services/message');
 
@@ -51,7 +51,7 @@ module.exports.putMessage = controllerWrapper(async (req, res) => {
   return res.json(message);
 });
 
-module.exports.deleteMessageById = controllerWrapper(async (req, res) => {
-  const message = await deleteMessageById(req.message.id);
+module.exports.deleteMessage = controllerWrapper(async (req, res) => {
+  const message = await deleteMessage(req.message.id);
   res.json(message);
 });
