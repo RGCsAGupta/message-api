@@ -4,13 +4,17 @@
   "description": "",
   "main": "src/app.js",
   "scripts": {
-    "start": "node bin/www",
     "create-sample-users": "node -r dotenv/config bin/create-sample-users dotenv_config_path=.env",
+    "create-test-users": "node -r dotenv/config bin/create-test-users",
+    "prestart": "npm run create-sample-users",
+    "start": "node bin/www",
     "start:local": "node -r dotenv/config bin/www dotenv_config_path=.env",
-    "test": "npm run test:lint && npm run test:unit -- dotenv_config_path=.env",
-    "test:ci": "npm run test:lint && npm run test:unit",
-    "test:lint": "eslint ./src",
-    "test:unit": "nyc mocha -r dotenv/config src/app --timeout=3000 --exit"
+    "lint": "eslint ./src",
+    "test": "nyc mocha -r dotenv/config --require test/setup.js --file test/**/*.spec.js --timeout=3000 --exit",
+    "pretest:ci": "npm run create-test-users",
+    "test:ci": "npm run lint && npm run test",
+    "pretest:local": "NODE_ENV=test npm run create-test-users",
+    "test:local": "NODE_ENV=test npm run test"
   },
   "author": "",
   "license": "ISC",
