@@ -3,8 +3,9 @@ const resolveDbName = () => {
     case 'development':
       return 'local-db';
     case 'test':
-    case 'CI':
       return 'test';
+    case 'CI':
+      return 'test-ci';
     default:
       return 'prod';
   }
