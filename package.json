@@ -13,7 +13,6 @@
     "test": "nyc mocha -r dotenv/config --require test/setup.js --file test/**/*.spec.js --timeout=3000 --exit",
     "pretest:ci": "npm run create-test-users",
     "test:ci": "npm run lint && npm run test",
-    "pretest:local": "NODE_ENV=test npm run create-test-users",
     "test:local": "NODE_ENV=test npm run test"
   },
   "author": "",
@@ -41,6 +40,7 @@
     "passport-http-bearer": "^1.0.1",
     "rate-limiter-flexible": "^2.2.1",
     "swagger-jsdoc": "^6.0.2",
-    "swagger-ui-express": "^4.1.6"
+    "swagger-ui-express": "^4.1.6",
+    "uuid": "^3.4.0"
   }
 }
