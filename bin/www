@@ -7,7 +7,7 @@ const { normalizePort } = require('../src/utils');
 
 const logError = logger.extend('error');
 (async () => {
-  // init scripts for dbs
+  // init scripts for db
   await initDb(optionsDb);
 
   const app = require('../src/app');
