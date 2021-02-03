@@ -57,7 +57,7 @@ for more details please check following:
 - [configuration](.github/workflows/node.js.yml)
 - [coverage report](https://github.com/CExAGupta/message-api/actions?query=workflow%3A%22Node.js+CI%22+branch%3Amain+event%3Apush+actor%3ACExAGupta)
 
-## Production setup
+## Production setup [link](https://cexagupta-qlik-test.herokuapp.com/api/v1/messages)
 
 For this repository CD is setup for main branch.
 
