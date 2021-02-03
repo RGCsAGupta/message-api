@@ -13,5 +13,6 @@ module.exports = {
   },
   rules: {
     'class-methods-use-this': 0,
+    'no-restricted-syntax': 0,
   },
 };
