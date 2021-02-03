@@ -1,5 +1,6 @@
 const { RateLimiterMongo } = require('rate-limiter-flexible');
 const mongoose = require('mongoose');
+const { isProduction } = require('../utils');
 
 const mongoConn = mongoose.connection;
 
@@ -8,6 +9,9 @@ const opts = {
   points: 10, // Number of points
   duration: 1, // Per second(s)
 };
+if (!isProduction()) {
+  opts.points = Number.MAX_SAFE_INTEGER;
+}
 
 const rateLimiterMongo = new RateLimiterMongo(opts);
 
