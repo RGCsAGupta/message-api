@@ -1,5 +1,31 @@
 const mongoose = require('mongoose');
 
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     Message:
+ *       title: A message
+ *       type: object
+ *       properties:
+ *         _id:
+ *           type: mongoose.Types.ObjectId
+ *           description: unique identifier
+ *         createdAt:
+ *           type: Date
+ *           description: created at date
+ *         updatedAt:
+ *           type: Date
+ *           description: last updated at date
+ *         text:
+ *           type: string
+ *           description: Message text
+ *         isPalindrome:
+ *           type: boolean
+ *           description: flag to tell if the message string is palindrome
+ *       required:
+ *         - text
+ */
 const messageSchema = new mongoose.Schema({
   text: { type: String, required: true },
 }, { timestamps: true });

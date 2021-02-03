@@ -9,9 +9,6 @@ module.exports = {
     },
   },
   apis: [
-    './src/models*.js',
-    './src/models/**/*.js',
-    './src/routes*.js',
-    './src/routes/**/*.js',
+    './src/**/*.js',
   ],
 };
