@@ -32,3 +32,7 @@ module.exports.updateMessage = async (message, { text }) => {
 };
 
 module.exports.deleteMessage = async (message) => message.remove();
+
+module.exports.deleteAll = async () => {
+  await MessageModel.deleteMany({});
+};
