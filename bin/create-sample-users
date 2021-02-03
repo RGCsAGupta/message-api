@@ -1,0 +1,21 @@
+const logger = require('debug')('create-sample-users');
+const users = require('../data/users');
+const { createUser, deleteAll } = require('../src/services/user');
+const { optionsDb } = require('../src/config/options.db');
+const { init: initDb } = require('../src/services/db');
+
+(async () => {
+  // init scripts for db
+  await initDb(optionsDb);
+
+  await deleteAll();
+  // eslint-disable-next-line no-restricted-syntax
+  for await (const userData of users) {
+    await createUser(userData);
+  }
+})()
+  .then(() => process.exit(0))
+  .catch((err) => {
+    logger.extend('error')(err);
+    process.exit(1);
+  });
